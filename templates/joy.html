@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<titletest</title>
+		<meta charset="utf-8">
+
+		<style>
+*
+
+body
+{
+    background: url("{{ url_for('video_feed') }}") no-repeat center center fixed;
+		background-size: cover;
+    overscroll-behavior:contain;
+		overflow: hidden;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-top: 0px;
+}
+header {
+	padding-top: 0px;
+	display:block;
+	height:20%; 
+	width:100;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+}
+
+.left_zone{
+
+    float:left;
+    width:20%;
+    height:100%;
+    background-color:black ;
+    opacity:0.5;
+    margin:0;
+    padding:0; 
+}
+
+
+.right_zone{
+    float:right;
+    width:20%;
+    height:100%;
+    background-color:pink ;
+    opacity:0.5;
+    margin:auto;
+    padding:0; 
+}
+
+.middle_zone{   
+    float:left;
+    width:60%;
+    height:20%;
+    background: white; 
+    padding:0;
+    margin:auto;
+
+   /* -webkit-box-sizing: border-box;box not larger when borders applied */
+} 
+
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color:transparent;
+    user-select: none;
+}
+
+
+#joy2Div
+{ 
+	position:absolute;
+
+	bottom: 10px;
+	width:200px;
+	height:200px;
+
+}
+#joy1Div
+{  
+	position:absolute;
+	bottom: 10px;
+	width:200px;
+	height:200px;
+
+}
+
+
+#joystick
+{
+	border: 1px solid #FF0000;
+}
+#joystick2
+{
+	border: 1px solid #0000FF;
+}
+		</style>
+	    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/joy.js') }}"></script>
+			
+			
+				<header>
+						<h1></h1>
+				</header>
+	
+	
+			</head>
+
+	<body>
+	
+		<!-- Example of two JoyStick integrated in the page structure -->
+		
+	
+			<div id="left" class="left_zone">
+					<!--<h2>jkndsad</h2> n-->
+				<div id="joy1Div"></div>
+			
+			</div>
+			
+
+			<div class="middle_zone">
+			<!--<h2>सोन परी</h2> --> 
+	
+			</div>
+
+			<div id="right" class="right_zone">
+		
+				<div id="joy2Div"></div>
+			<!--Posizione X:<input id="joy2PosizioneX" type="text" /></br>
+				Posizione Y:<input id="joy2PosizioneY" type="text" /></br>
+				Direzione:<input id="joy2Direzione" type="text" /></br> 
+				X :<input id="joy2X" type="text" /></br>
+				Y :<input id="joy2Y" type="text" /> -->
+			</div>			
+		
+
+		<script type="text/javascript">
+             
+			 var socket_status = io.connect('http://'+location.host+"/status");
+      	var socket_control = io.connect('http://'+location.host+"/control");
+
+
+// Create JoyStick object into the DIV 'joy1Div'
+var Joy1 = new JoyStick('joy1Div');
+
+
+
+// Create JoyStick object into the DIV 'joy2Div'
+var joy2Param = { "title": "joystick2", "autoReturnToCenter": false };
+var Joy2 = new JoyStick('joy2Div', joy2Param);
+
+
+	
+document.getElementById("joy2Div").ontouchmove = joy2touch;
+document.getElementById("joy2Div").ontouchend = stopmotor;
+//socket_control.emit('control', {data:{"a":1}});
+	
+document.getElementById("joy1Div").ontouchmove = joy1touch;
+document.getElementById("joy1Div").ontouchend = stopmotor;
+
+   function joy1touch()
+   {
+	//document.getElementById("demo").innerHTML = "Hello World";
+	//joy1IinputPosX.value=Joy1.GetPosX(); 
+	//joy1InputPosY.value=Joy1.GetPosY(); 
+	//joy1Direzione.value=Joy1.GetDir(); 
+	//joy1X.value=Joy1.GetX(); 
+	//joy1Y.value=Joy1.GetY(); 
+	//Joy1.GetDir();
+	Joy1.GetDir();
+	//JoY1.normalXY();
+	//Joy1.GetX();
+
+   }
+
+   function joy2touch()
+  {
+	
+	//joy2IinputPosX.value=Joy2.GetPosX(); 
+	//joy2InputPosY.value=Joy2.GetPosY(); 
+	//socket_control.emit('control', {data:{"a":1}});
+	//joy2Direzione.value=Joy2.GetDir(); 
+	//joy2X.value=Joy2.GetX(); 
+	//joy2Y.value=Joy2.GetY(); 
+	//Joy1.GetDir();
+
+
+	Joy2.normalXY();
+//	Joy2.GetX(); 
+//	Joy2.GetY(); 
+   }
+
+	 function stopmotor()
+	 {
+		socket_control.emit('control', {data:{"joystick":"C"}});
+
+	 }
+
+		</script>
+	</body>
+</html>
