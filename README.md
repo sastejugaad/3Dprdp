@@ -10,6 +10,9 @@ The main program is written in python and uses flask and socket io to run a webs
 Demo video
 https://www.youtube.com/watch?v=7Dail3PpAlU
 
+Tutorial article
+https://www.instructables.com/3D-Printed-Robotics-Development-Platform-With-Nvid/
+
 Cad Files:-
 https://grabcad.com/library/nvidia-jetson-nano-robot-development-platform-for-3d-printing-1
 
