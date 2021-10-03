@@ -3,7 +3,7 @@ Nvidia jetson nano development platform
 
 This is a 3D-printed robotics development platform. Originally inspired by DJI robomaster s1 I wanted to design something more affordable and accessible system of my own. 
 
-Powered by Nvidia jetson nano board runs on ubuntu. AI and machine learning models can be implemented easily on this. With few changes in code, it can also support Nvidia jetracer and many other projects. I designed this to test out prototypes and ideas quickly. Instead of setting from scratch for every project, this will help in testing critical stuff early on the project.
+Powered by Nvidia jetson nano board runs on ubuntu. AI and machine learning models can be implemented easily on this. With few changes in code, it can also support Nvidia jetracer and many other projects. I designed this to test out prototypes and ideas quickly. Instead of setting from scratch for every project, this will help in testing critical stuff early on the project. motor driver MX1508
 
 The main program is written in python and uses flask and socket io to run a webserver on board. You can connect to the interface using the IP address.
 
